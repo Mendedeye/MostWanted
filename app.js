@@ -113,7 +113,7 @@ function searchByWeight(people) {
 }
 
 function searchByEyeColor(people) {
-    const eyeColorToSearchFor = prompt('Please enter in desired Eye Color to search for.');
+    const eyeColorToSearchFor =  validatedPrompt('Please enter in your desired eye color.', people.map(person => `${person.eyeColor}`));
     const eyeColorFilterResults = people.filter(person=> (person.eyeColor.toLowerCase() === eyeColorToSearchFor.toLowerCase()));
     return eyeColorFilterResults;
 }
