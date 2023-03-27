@@ -72,15 +72,15 @@ function searchPeopleDataSet(people) {
 }
 
 function searchById(people) {
-    const idToSearchForString =  validatedPrompt('Please enter the id of the person you are searching for.', people.map(person => `${person.id}`))
+    const idToSearchForString =  validatedPrompt('Please enter the id of the person you are searching for.', people.map(person => `${person.id}`));
     const idToSearchForInt = parseInt(idToSearchForString);
     const idFilterResults = people.filter(person => person.id === idToSearchForInt);
     return idFilterResults;
 }
 
 function searchByName(people) {
-    const firstNameToSearchFor = prompt('Please enter the the first name of the person you are searching for.');
-    const lastNameToSearchFor = prompt('Please enter the the last name of the person you are searching for.');
+    const firstNameToSearchFor =  validatedPrompt('Please enter the first name of the person you are searching for.', people.map(person => `${person.firstName}`));
+    const lastNameToSearchFor =  validatedPrompt('Please enter the last name of the person you are searching for.', people.map(person => `${person.lastName}`));
     const fullNameSearchResults = people.filter(person => (person.firstName.toLowerCase() === firstNameToSearchFor.toLowerCase() && person.lastName.toLowerCase() === lastNameToSearchFor.toLowerCase()));
     return fullNameSearchResults;
 }
