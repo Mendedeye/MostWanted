@@ -113,13 +113,13 @@ function searchByWeight(people) {
 }
 
 function searchByEyeColor(people) {
-    const eyeColorToSearchFor =  validatedPrompt('Please enter in your desired eye color.', people.map(person => `${person.eyeColor}`));
+    const eyeColorToSearchFor =  validatedPrompt('Please enter in your desired eye color to search for.', people.map(person => `${person.eyeColor}`));
     const eyeColorFilterResults = people.filter(person=> (person.eyeColor.toLowerCase() === eyeColorToSearchFor.toLowerCase()));
     return eyeColorFilterResults;
 }
 
 function searchByOccupation(people) {
-    const occupationToSearchFor = prompt('Please enter in desired occupation to search for.');
+    const occupationToSearchFor =  validatedPrompt('Please enter in your desired occupation to search for', people.map(person => `${person.occupation}`));
     const occupationFilterResults = people.filter(person => (person.occupation.toLowerCase() === occupationToSearchFor.toLowerCase()));
     return occupationFilterResults;
 }
