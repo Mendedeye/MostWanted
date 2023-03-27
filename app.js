@@ -141,9 +141,7 @@ function mainMenu(person, people) {
             // displayPeople('Family', personFamily);
             break;
         case "descendants":
-            //! TODO
-            // let personDescendants = findPersonDescendants(person, people);
-            // displayPeople('Descendants', personDescendants);
+            let personDescendants = findDescendants(person, people);
             break;
         case "quit":
             return;
@@ -168,6 +166,19 @@ function displayPersonInfo(person) {
         personInfo += `Eye Color:  ${person.eyeColor}\n`;
         personInfo += `Occupation: ${person.occupation}`;
     alert(`${personInfo}`);
+}
+
+function findDescendants(person, people) {
+	let personDescendants = data.filter(function(el) {
+		if (el.parents[0] === person.id || el.parents[1] === person.id) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	})
+
+	alert(`${displayPeople('Descendants:', personDescendants)}`);
 }
 
 function displayPeople(displayTitle, peopleToDisplay) {
