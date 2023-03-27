@@ -32,7 +32,7 @@ function searchPeopleDataSet(people) {
 
     const searchTypeChoice = validatedPrompt(
         'Please enter in what type of search you would like to perform.',
-        ['id', 'name', 'gender', 'date of birth', 'height', 'weight', 'eye color']
+        ['id', 'name', 'gender', 'date of birth', 'height', 'weight', 'eye color', 'occupation']
     );
 
     let results = [];
@@ -58,6 +58,9 @@ function searchPeopleDataSet(people) {
         case 'eye color':
             results = searchByEyeColor(people);
             break;    
+        case 'occupation':
+            results = searchByOccupation(people);
+            break;
         default:
             return searchPeopleDataSet(people);
     }
@@ -110,6 +113,12 @@ function searchByEyeColor(people) {
     const eyeColorToSearchFor = prompt('Please enter in desired Eye Color to search for.');
     const eyeColorFilterResults = people.filter(person=> (person.eyeColor.toLowerCase() === eyeColorToSearchFor.toLowerCase()));
     return eyeColorFilterResults;
+}
+
+function searchByOccupation(people) {
+    const occupationToSearchFor = prompt('Please enter in desired occupation to search for.');
+    const occupationFilterResults = people.filter(person => (person.occupation.toLowerCase() === occupationToSearchFor.toLowerCase()));
+    return occupationFilterResults;
 }
 //----------------------------------------------------------------------------------------------------------
 // main... methods
