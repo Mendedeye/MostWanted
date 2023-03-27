@@ -133,8 +133,7 @@ function mainMenu(person, people) {
 
     switch (mainMenuUserActionChoice) {
         case "info":
-            //! TODO
-            // displayPersonInfo(person);
+            displayPersonInfo(person);
             break;
         case "family":
             //! TODO
@@ -153,6 +152,22 @@ function mainMenu(person, people) {
     }
 
     return mainMenu(person, people);
+}
+
+//----------------------------------------------------------------------------------------------------------
+// display...Method
+//----------------------------------------------------------------------------------------------------------
+
+function displayPersonInfo(person) {
+    let personInfo =  `First Name: ${person.firstName}\n`;
+        personInfo += `Last Name:  ${person.lastName}\n`;
+        personInfo += `Gender:     ${person.gender}\n`;
+        personInfo += `DOB:        ${person.dob}\n`;
+        personInfo += `Height:     ${person.height}\n`;
+        personInfo += `Weight:     ${person.weight}\n`;
+        personInfo += `Eye Color:  ${person.eyeColor}\n`;
+        personInfo += `Occupation: ${person.occupation}`;
+    alert(`${personInfo}`);
 }
 
 function displayPeople(displayTitle, peopleToDisplay) {
