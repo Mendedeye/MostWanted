@@ -86,7 +86,7 @@ function searchByName(people) {
 }
 
 function searchByGender(people) {
-    const genderToSearchFor = prompt('Please enter in desired gender to search for.');
+    const genderToSearchFor =  validatedPrompt('Please enter in the desired gender to search for.', people.map(person => `${person.gender}`));
     const genderFilterResults = people.filter(person=> (person.gender.toLowerCase() === genderToSearchFor.toLowerCase()));
     return genderFilterResults;
 }
