@@ -32,7 +32,7 @@ function searchPeopleDataSet(people) {
 
     const searchTypeChoice = validatedPrompt(
         'Please enter in what type of search you would like to perform.',
-        ['id', 'name', 'gender']
+        ['id', 'name', 'gender', 'date of birth', 'height']
     );
 
     let results = [];
@@ -46,6 +46,11 @@ function searchPeopleDataSet(people) {
         case 'gender':
             results = searchByGender(people);
             break;
+        case 'Date of Birth':
+            results = searchByDOB(people);
+            break;
+        case 'Height':
+            results = searchByHeight(people);
         default:
             return searchPeopleDataSet(people);
     }
@@ -71,6 +76,20 @@ function searchByGender(people) {
     const genderToSearchFor = prompt('Please enter in desired gender to search for.');
     const genderFilterReults = people.filter(person=> (person.gender.toLowerCase() === genderToSearchFor.toLowerCase()));
     return genderFilterReults;
+}
+
+function searchByDOB(people) {
+    const dobToSearchFor = prompt('Please enter in desired mm/dd/yyyy to search for.');
+    const dobFilterResults = people.filter(person=> (person.dob === dobToSearchFor));
+    return dobFilterResults;
+
+}
+
+function searchByHeight(people) {
+    const heightToSearchForString = prompt('Please enter is desired height to search for.');
+    const heightToSearchForInt = parseInt(heightToSearchForString)
+    const heightFilterResults = people.filter(person=> (person.height === heightToSearchForInt));
+    return heightFilterResults;
 }
 //----------------------------------------------------------------------------------------------------------
 // main... methods
