@@ -32,7 +32,7 @@ function searchPeopleDataSet(people) {
 
     const searchTypeChoice = validatedPrompt(
         'Please enter in what type of search you would like to perform.',
-        ['id', 'name', 'gender', 'date of birth', 'height']
+        ['id', 'name', 'gender', 'date of birth', 'height', 'weight', 'eye color']
     );
 
     let results = [];
@@ -46,11 +46,18 @@ function searchPeopleDataSet(people) {
         case 'gender':
             results = searchByGender(people);
             break;
-        case 'Date of Birth':
+        case 'date of birth':
             results = searchByDOB(people);
             break;
-        case 'Height':
+        case 'height':
             results = searchByHeight(people);
+            break;
+        case 'weight':
+            results = searchByWeight(people);
+            break;
+        case 'eye color':
+            results = searchByEyeColor(people);
+            break;    
         default:
             return searchPeopleDataSet(people);
     }
@@ -74,22 +81,35 @@ function searchByName(people) {
 
 function searchByGender(people) {
     const genderToSearchFor = prompt('Please enter in desired gender to search for.');
-    const genderFilterReults = people.filter(person=> (person.gender.toLowerCase() === genderToSearchFor.toLowerCase()));
-    return genderFilterReults;
+    const genderFilterResults = people.filter(person=> (person.gender.toLowerCase() === genderToSearchFor.toLowerCase()));
+    return genderFilterResults;
 }
 
 function searchByDOB(people) {
     const dobToSearchFor = prompt('Please enter in desired mm/dd/yyyy to search for.');
-    const dobFilterResults = people.filter(person=> (person.dob === dobToSearchFor));
+    const dobFilterResults = people.filter(person=> person.dob === dobToSearchFor);
     return dobFilterResults;
 
 }
 
 function searchByHeight(people) {
-    const heightToSearchForString = prompt('Please enter is desired height to search for.');
+    const heightToSearchForString = prompt('Please enter is desired height (inches) to search for.');
     const heightToSearchForInt = parseInt(heightToSearchForString)
-    const heightFilterResults = people.filter(person=> (person.height === heightToSearchForInt));
+    const heightFilterResults = people.filter(person=> person.height === heightToSearchForInt);
     return heightFilterResults;
+}
+
+function searchByWeight(people) {
+    const weightToSearchForString = prompt('Please enter is desired weight (pounds) to search for.');
+    const weightToSearchForInt = parseInt(weightToSearchForString)
+    const weightFilterResults = people.filter(person=> person.weight === weightToSearchForInt);
+    return weightFilterResults;
+}
+
+function searchByEyeColor(people) {
+    const eyeColorToSearchFor = prompt('Please enter in desired Eye Color to search for.');
+    const eyeColorFilterResults = people.filter(person=> (person.eyeColor.toLowerCase() === eyeColorToSearchFor.toLowerCase()));
+    return eyeColorFilterResults;
 }
 //----------------------------------------------------------------------------------------------------------
 // main... methods
