@@ -13,7 +13,7 @@ function runSearchAndMenu(people) {
     const searchResults = searchPeopleDataSet(people);
 
     if (searchResults.length > 1) {
-        DisplayPeople('Search Results', searchResults);
+        displayPeople('Search Results', searchResults);
     }
     else if (searchResults.length === 1) {
         const person = searchResults[0];
@@ -24,11 +24,15 @@ function runSearchAndMenu(people) {
     }
 }
 
+//----------------------------------------------------------------------------------------------------------
+// search... methods
+//----------------------------------------------------------------------------------------------------------
+
 function searchPeopleDataSet(people) {
 
     const searchTypeChoice = validatedPrompt(
         'Please enter in what type of search you would like to perform.',
-        ['id', 'name', 'traits']
+        ['id', 'name', 'gender']
     );
 
     let results = [];
@@ -39,9 +43,8 @@ function searchPeopleDataSet(people) {
         case 'name':
             results = searchByName(people);
             break;
-        case 'traits':
-            //! TODO
-            // results = searchByTraits(people);
+        case 'gender':
+            results = searchByGender(people);
             break;
         default:
             return searchPeopleDataSet(people);
@@ -63,6 +66,15 @@ function searchByName(people) {
     const fullNameSearchResults = people.filter(person => (person.firstName.toLowerCase() === firstNameToSearchFor.toLowerCase() && person.lastName.toLowerCase() === lastNameToSearchFor.toLowerCase()));
     return fullNameSearchResults;
 }
+
+function searchByGender(people) {
+    const genderToSearchFor = prompt('Please enter in desired gender to search for.');
+    const genderFilterReults = people.filter(person=> (person.gender.toLowerCase() === genderToSearchFor.toLowerCase()));
+    return genderFilterReults;
+}
+//----------------------------------------------------------------------------------------------------------
+// main... methods
+//----------------------------------------------------------------------------------------------------------
 
 function mainMenu(person, people) {
 
