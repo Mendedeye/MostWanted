@@ -32,7 +32,7 @@ function searchPeopleDataSet(people) {
 
     const searchTypeChoice = validatedPrompt(
         'Please enter in what type of search you would like to perform.',
-        ['id', 'name', 'gender', 'date of birth', 'height', 'weight', 'eye color', 'occupation']
+        ['id', 'name', 'gender', 'date of birth', 'height', 'weight', 'eye color', 'occupation', 'traits']
     );
 
     let results = [];
@@ -60,6 +60,9 @@ function searchPeopleDataSet(people) {
             break;    
         case 'occupation':
             results = searchByOccupation(people);
+            break;
+        case 'traits':
+            results = searchByTraits(people);
             break;
         default:
             return searchPeopleDataSet(people);
@@ -119,6 +122,45 @@ function searchByOccupation(people) {
     const occupationToSearchFor = prompt('Please enter in desired occupation to search for.');
     const occupationFilterResults = people.filter(person => (person.occupation.toLowerCase() === occupationToSearchFor.toLowerCase()));
     return occupationFilterResults;
+}
+
+function searchByTraits(people) {
+    let traitToSearchFor = '';
+    let tempArray = people;
+
+    while(traitToSearchFor.toLowerCase() != 'quit' || tempArray === [] || tempArray.length === 1) {
+        traitToSearchFor = prompt('Please enter in one of these traits to search for: \nName \nGender \nDate of Birth \nHeight \nWeight \n Eye Color \nOccupation: ');
+        switch (traitToSearchFor) {
+            case 'name':
+                results = searchByName(tempArray);
+                break;
+            case 'gender':
+                results = searchByGender(tempArray);
+                break;
+            case 'date of birth':
+                results = searchByDOB(tempArray);
+                break;
+            case 'height':
+                results = searchByHeight(tempArray);
+                break;
+            case 'weight':
+                results = searchByWeight(tempArray);
+                break;
+            case 'eye color':
+                results = searchByEyeColor(tempArray);
+                break;    
+            case 'occupation':
+                results = searchByOccupation(tempArray);
+                break;
+            case 'quit':
+                return tempArray;
+            default:
+                ('Please enter in a valid choice: ');
+        }
+        tempArray = results;
+    };
+
+    return results;
 }
 //----------------------------------------------------------------------------------------------------------
 // main... methods
