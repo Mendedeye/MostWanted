@@ -79,20 +79,20 @@ function searchById(people) {
 }
 
 function searchByName(people) {
-    const firstNameToSearchFor =  validatedPrompt('Please enter the first name of the person you are searching for.', people.map(person => `${person.firstName}`));
-    const lastNameToSearchFor =  validatedPrompt('Please enter the last name of the person you are searching for.', people.map(person => `${person.lastName}`));
+    const firstNameToSearchFor = validatedPrompt('Please enter the first name of the person you are searching for.', people.map(person => `${person.firstName}`));
+    const lastNameToSearchFor = validatedPrompt('Please enter the last name of the person you are searching for.', people.map(person => `${person.lastName}`));
     const fullNameSearchResults = people.filter(person => (person.firstName.toLowerCase() === firstNameToSearchFor.toLowerCase() && person.lastName.toLowerCase() === lastNameToSearchFor.toLowerCase()));
     return fullNameSearchResults;
 }
 
 function searchByGender(people) {
-    const genderToSearchFor =  validatedPrompt('Please enter in the desired gender to search for.', people.map(person => `${person.gender}`));
+    const genderToSearchFor = validatedPrompt('Please enter in the desired gender to search for.', people.map(person => `${person.gender}`));
     const genderFilterResults = people.filter(person=> (person.gender.toLowerCase() === genderToSearchFor.toLowerCase()));
     return genderFilterResults;
 }
 
 function searchByDOB(people) {
-    const dobToSearchFor = prompt('Please enter in desired mm/dd/yyyy to search for.');
+    const dobToSearchFor = validatedPrompt('Please enter in your desired DOB', people.map(person => `${person.dob}`));
     const dobFilterResults = people.filter(person=> person.dob === dobToSearchFor);
     return dobFilterResults;
 
