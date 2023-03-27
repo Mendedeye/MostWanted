@@ -99,7 +99,7 @@ function searchByDOB(people) {
 }
 
 function searchByHeight(people) {
-    const heightToSearchForString = prompt('Please enter is desired height (inches) to search for.');
+    const heightToSearchForString =  validatedPrompt('Please enter in your desired height in inches.', people.map(person => `${person.height}`));
     const heightToSearchForInt = parseInt(heightToSearchForString)
     const heightFilterResults = people.filter(person=> person.height === heightToSearchForInt);
     return heightFilterResults;
