@@ -72,7 +72,7 @@ function searchPeopleDataSet(people) {
 }
 
 function searchById(people) {
-    const idToSearchForString = prompt('Please enter the id of the person you are searching for.');
+    const idToSearchForString =  validatedPrompt('Please enter the id of the person you are searching for.', people.map(person => `${person.id}`))
     const idToSearchForInt = parseInt(idToSearchForString);
     const idFilterResults = people.filter(person => person.id === idToSearchForInt);
     return idFilterResults;
