@@ -211,29 +211,20 @@ function displayPersonInfo(person) {
 
 function findPersonFamily(person, people) {
     let family = [];
-    //family = family.concat(findParents(person, people));
+    family = family.concat(findSpouse(person, people));
+    family = family.concat(findParents(person, people));
     family = family.concat(findSiblings(person, people));
-
-    
-
-
-
-    // let personFamily = data.filter(function(el){
-    //     if(el.id === person.currentSpouse || el.id === person.parents[0] || el.id === person.parents[1]) {
-    //         if(el.id === person.currentSpouse){
-    //             personFamily += person.currentSpouse;
-    //         }
-    //         else {
-    //             personFamily += person.parents[0];
-    //             personFamily += person.parents[1];
-    //         }
-    //     }
-    //     else {
-    //         return false;
-    //     }
-    //})
-
     displayPeople('Family:', family);
+}
+
+function findSpouse(person, people) {
+    let spouse = people.filter(el => person.currentSpouse === el.id);
+    return spouse;
+}
+
+function findParents(person, people) {
+    let parents = people.filter(el => person.parents.includes(el.id));
+    return parents;
 }
 
 function findSiblings(person, people) {
@@ -250,10 +241,16 @@ function findSiblings(person, people) {
     return siblings;
 }
 
+function addFirstAndLastNames(id) {
+    let fullName = '';
+    fullName = fullName.concat(id.firstName);
+    fullName = fullName.concat(id.lastName);
+
+    return fullName;
+}
 //---------------------------------------------------------------------------------------------------------
 
 function findDescendants(person, people) {
-    // let descendants = [];
 	let personDescendants = data.filter(function(el) {
 		if (el.parents[0] === person.id || el.parents[1] === person.id) {    
 			return true;
@@ -265,18 +262,6 @@ function findDescendants(person, people) {
 
 	displayPeople('Descendants:', personDescendants);
 }
-
-// function recursionDescendants(person) {
-//     let descendants = [];
-
-//     if (person.parents.includes(person)) {
-//         return true;
-//     }
-//     else {
-//         return false;
-//     }
-// }
-
 function displayPeople(displayTitle, peopleToDisplay) {
     const formatedPeopleDisplayText = peopleToDisplay.map(person => `${person.firstName} ${person.lastName}`).join('\n');
     alert(`${displayTitle}\n\n${formatedPeopleDisplayText}`);
