@@ -240,6 +240,8 @@ function displayPeople(displayTitle, peopleToDisplay) {
 }
 
 function validatedPrompt(message, acceptableAnswers) {
+    acceptableAnswers = removeDuplicates(acceptableAnswers);
+
     acceptableAnswers = acceptableAnswers.map(aa => aa.toLowerCase());
 
     const builtPromptWithAcceptableAnswers = `${message} \nAcceptable Answers: ${acceptableAnswers.map(aa => `\n-> ${aa}`).join('')}`;
@@ -270,5 +272,8 @@ function exitOrRestart(people) {
             alert('Invalid input. Please try again.');
             return exitOrRestart(people);
     }
+}
 
+function removeDuplicates(array) {
+    return array.filter((item, index) => array.indexOf(item) === index);
 }
