@@ -207,23 +207,55 @@ function displayPersonInfo(person) {
         personInfo += `Occupation: ${person.occupation}`;
     alert(`${personInfo}`);
 }
+//---------------------------------------------------------------------------------------------------------
 
 function findPersonFamily(person, people) {
-    let personFamily = data.filter(function(el){
-        if(el.id === person.currentSpouse || el.id === person.parents[0] || el.id === person.parents[1] || el.parents[0] === person.parents[0]) {
-            return true;
+    let family = [];
+    //family = family.concat(findParents(person, people));
+    family = family.concat(findSiblings(person, people));
+
+    
+
+
+
+    // let personFamily = data.filter(function(el){
+    //     if(el.id === person.currentSpouse || el.id === person.parents[0] || el.id === person.parents[1]) {
+    //         if(el.id === person.currentSpouse){
+    //             personFamily += person.currentSpouse;
+    //         }
+    //         else {
+    //             personFamily += person.parents[0];
+    //             personFamily += person.parents[1];
+    //         }
+    //     }
+    //     else {
+    //         return false;
+    //     }
+    //})
+
+    displayPeople('Family:', family);
+}
+
+function findSiblings(person, people) {
+    let siblings = data.filter(function(el){
+        if(person.parents[0] === el.parents[0] || person.parents[1] === el.parents[1]) {
+            if(el != person){
+                return true;
+            }
         }
         else {
             return false;
         }
-    })
-
-    displayPeople('Family:', personFamily);
+    });
+    return siblings;
 }
 
+//---------------------------------------------------------------------------------------------------------
+
 function findDescendants(person, people) {
+    // let descendants = [];
 	let personDescendants = data.filter(function(el) {
-		if (el.parents[0] === person.id || el.parents[1] === person.id) {
+		if (el.parents[0] === person.id || el.parents[1] === person.id) {    
 			return true;
 		}
 		else {
@@ -233,6 +265,17 @@ function findDescendants(person, people) {
 
 	displayPeople('Descendants:', personDescendants);
 }
+
+// function recursionDescendants(person) {
+//     let descendants = [];
+
+//     if (person.parents.includes(person)) {
+//         return true;
+//     }
+//     else {
+//         return false;
+//     }
+// }
 
 function displayPeople(displayTitle, peopleToDisplay) {
     const formatedPeopleDisplayText = peopleToDisplay.map(person => `${person.firstName} ${person.lastName}`).join('\n');
