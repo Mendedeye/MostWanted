@@ -128,8 +128,8 @@ function searchByTraits(people) {
     let traitToSearchFor = '';
     let tempArray = people;
 
-    while(traitToSearchFor.toLowerCase() != 'quit' || tempArray === [] || tempArray.length === 1) {
-        traitToSearchFor = prompt('Please enter in one of these traits to search for: \nName \nGender \nDate of Birth \nHeight \nWeight \n Eye Color \nOccupation: ');
+    while(tempArray.length > 1 && traitToSearchFor != 'quit') {
+        traitToSearchFor = prompt('Please enter in one of these traits to search for: \nName \nGender \nDate of Birth \nHeight \nWeight \nEye Color \nOccupation: \nQuit:');
         switch (traitToSearchFor) {
             case 'name':
                 results = searchByName(tempArray);
@@ -160,7 +160,7 @@ function searchByTraits(people) {
         tempArray = results;
     };
 
-    return results;
+    return tempArray;
 }
 //----------------------------------------------------------------------------------------------------------
 // main... methods
