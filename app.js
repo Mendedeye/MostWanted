@@ -218,7 +218,7 @@ function findPersonFamily(person, people) {
         }
     })
 
-    alert(`${displayPeople('Family:', personFamily)}`)
+    displayPeople('Family:', personFamily);
 }
 
 function findDescendants(person, people) {
@@ -231,7 +231,7 @@ function findDescendants(person, people) {
 		}
 	})
 
-	alert(`${displayPeople('Descendants:', personDescendants)}`);
+	displayPeople('Descendants:', personDescendants);
 }
 
 function displayPeople(displayTitle, peopleToDisplay) {
