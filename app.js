@@ -178,10 +178,10 @@ function mainMenu(person, people) {
             displayPersonInfo(person);
             break;
         case "family":
-            let personFamily = findPersonFamily(person, people);
+            findPersonFamily(person, people);
             break;
         case "descendants":
-            let personDescendants = findDescendants(person, people);
+            recursionDescendants(person, people);
             break;
         case "quit":
             return;
@@ -228,7 +228,7 @@ function findParents(person, people) {
 }
 
 function findSiblings(person, people) {
-    let siblings = data.filter(function(el){
+    let siblings = people.filter(function(el){
         if(person.parents[0] === el.parents[0] || person.parents[1] === el.parents[1]) {
             if(el != person){
                 return true;
@@ -250,18 +250,34 @@ function addFirstAndLastNames(id) {
 }
 //---------------------------------------------------------------------------------------------------------
 
-function findDescendants(person, people) {
-	let personDescendants = data.filter(function(el) {
-		if (el.parents[0] === person.id || el.parents[1] === person.id) {    
-			return true;
-		}
-		else {
-			return false;
-		}
-	})
+// function findDescendants(person, people) {
+// 	let personDescendants = people.filter(function(el) {
+// 		if (el.parents[0] === person.id || el.parents[1] === person.id) {    
+// 			return true;
+// 		}
+// 		else {
+// 			return false;
+// 		}
+// 	})
 
-	displayPeople('Descendants:', personDescendants);
+// 	displayPeople('Descendants:', personDescendants);
+// }
+
+//---------------------------------------------------------------------------------------------------------
+function recursionDescendants(person, people, descendants) {
+    descendants = people.filter(el => el.parents.includes(person.id));
+
+    if (descendants.length === 0) {
+        return;
+    }
+    descendants.forEach(children => {descendants.concat(children.id); recursionDescendants(children, people, descendants);});
+
+    displayPeople('Descendants', descendants);
 }
+
+// tree.children.forEach(child => {console.log(child.name); printAllChildren(child);});
+
+//---------------------------------------------------------------------------------------------------------
 function displayPeople(displayTitle, peopleToDisplay) {
     const formatedPeopleDisplayText = peopleToDisplay.map(person => `${person.firstName} ${person.lastName}`).join('\n');
     alert(`${displayTitle}\n\n${formatedPeopleDisplayText}`);
