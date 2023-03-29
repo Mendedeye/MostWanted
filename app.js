@@ -181,7 +181,8 @@ function mainMenu(person, people) {
             findPersonFamily(person, people);
             break;
         case "descendants":
-            recursionDescendants(person, people);
+            let descendants = recursionDescendants(person, people);
+            displayPeople('Descendants', descendants);
             break;
         case "quit":
             return;
@@ -250,6 +251,8 @@ function addFirstAndLastNames(id) {
 }
 //---------------------------------------------------------------------------------------------------------
 
+// The 'mvp' code before the recursion written in lines 268-281
+//
 // function findDescendants(person, people) {
 // 	let personDescendants = people.filter(function(el) {
 // 		if (el.parents[0] === person.id || el.parents[1] === person.id) {    
@@ -263,21 +266,21 @@ function addFirstAndLastNames(id) {
 // 	displayPeople('Descendants:', personDescendants);
 // }
 
-//---------------------------------------------------------------------------------------------------------
-function recursionDescendants(person, people, descendants) {
-    descendants = people.filter(el => el.parents.includes(person.id));
+function recursionDescendants(searchedPerson, people) {
+    let newDescendants = [];
 
-    if (descendants.length === 0) {
-        return;
-    }
-    descendants.forEach(children => {descendants.concat(children.id); recursionDescendants(children, people, descendants);});
+    let descendants = people.filter(person => {
+        if(person.parents.includes(searchedPerson.id)){
+            newDescendants = recursionDescendants(person,people)
+            return true
+        }})
+        if(newDescendants.length > 0) {
+            descendants = descendants.concat(newDescendants);
+        }
 
-    displayPeople('Descendants', descendants);
+    return descendants;
 }
 
-// tree.children.forEach(child => {console.log(child.name); printAllChildren(child);});
-
-//---------------------------------------------------------------------------------------------------------
 function displayPeople(displayTitle, peopleToDisplay) {
     const formatedPeopleDisplayText = peopleToDisplay.map(person => `${person.firstName} ${person.lastName}`).join('\n');
     alert(`${displayTitle}\n\n${formatedPeopleDisplayText}`);
